@@ -1,0 +1,2 @@
+/Users/ambrosetemidayobako/Desktop/Dev/mobile-apps/Fuodz-delivery-boy/android/app/.cxx/RelWithDebInfo/711g5u13/x86/CMakeFiles/edit_cache.dir
+/Users/ambrosetemidayobako/Desktop/Dev/mobile-apps/Fuodz-delivery-boy/android/app/.cxx/RelWithDebInfo/711g5u13/x86/CMakeFiles/rebuild_cache.dir

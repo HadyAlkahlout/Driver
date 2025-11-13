@@ -1,0 +1,2 @@
+C:/Users/Administrator/Desktop/GeoMartProject/Driver/driver/android/app/.cxx/RelWithDebInfo/m2z634c6/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Administrator/Desktop/GeoMartProject/Driver/driver/android/app/.cxx/RelWithDebInfo/m2z634c6/arm64-v8a/CMakeFiles/rebuild_cache.dir

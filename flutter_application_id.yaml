@@ -1,0 +1,7 @@
+flutter_application_id:
+  android:
+    id: "com.geomart.driver"
+    name: "E2U Driver"
+  ios:
+    id: "com.geomart.driver"
+    name: "E2U Driver"
