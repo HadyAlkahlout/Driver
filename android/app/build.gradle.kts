@@ -32,7 +32,7 @@ android {
 
     defaultConfig {
         applicationId = "com.geomart.driver"
-        minSdk = 23
+        minSdk = flutter.minSdkVersion
         targetSdk = 35
         ndkVersion = "27.0.12077973"
         versionCode = flutter.versionCode

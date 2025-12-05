@@ -76,6 +76,8 @@ class AppStrings {
   static String userAuthToken = "auth_token";
   static String userKey = "user";
   static String driverVehicleKey = "driver_vehicle";
+  static String driverWaiting = "driver_waiting";
+  static String driverName = "driver_name";
   static String appLocale = "locale";
   static String notificationsKey = "notifications";
   static String appCurrency = "currency";

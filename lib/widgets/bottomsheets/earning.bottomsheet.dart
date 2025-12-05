@@ -89,7 +89,7 @@ class EarningBottomSheet extends StatelessWidget {
                                           decoration: InputDecoration.collapsed(
                                             hintText: "",
                                           ),
-                                          value: vm.selectedPaymentAccount,
+                                          initialValue: vm.selectedPaymentAccount,
                                           onChanged: (value) {
                                             vm.selectedPaymentAccount = value;
                                             vm.notifyListeners();

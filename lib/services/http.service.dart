@@ -16,9 +16,13 @@ class HttpService {
   late Dio dio;
   late SharedPreferences prefs;
 
-  Future<Map<String, String>> getHeaders() async {
+  Future<Map<String, String>> getHeaders({bool isRegister = false}) async {
     final userToken = await AuthServices.getAuthBearerToken();
-    return {
+    return isRegister ? {
+      HttpHeaders.acceptHeader: "application/json",
+      HttpHeaders.authorizationHeader: "$userToken",
+      "lang": translator.activeLocale.languageCode,
+    } : {
       HttpHeaders.acceptHeader: "application/json",
       HttpHeaders.authorizationHeader: "Bearer $userToken",
       "lang": translator.activeLocale.languageCode,
@@ -73,16 +77,17 @@ class HttpService {
   }
 
   //for post api calls
-  Future<Response> post(String url, body, {bool includeHeaders = true}) async {
+  Future<Response> post(String url, body, {bool includeHeaders = true, bool isRegister = false}) async {
     //preparing the api uri/url
     String uri = "$host$url";
 
     //preparing the post options if header is required
     final mOptions =
-        !includeHeaders ? null : Options(headers: await getHeaders());
+        !includeHeaders ? null : Options(headers: await getHeaders(isRegister: isRegister));
 
     print("POST Request to: $uri");
     print("POST Body: $body");
+    print("POST Headers: ${mOptions?.headers}");
 
     try {
       final response = await dio.post(uri, data: body, options: mOptions);
@@ -127,12 +132,13 @@ class HttpService {
     body, {
     FormData? formData,
     bool includeHeaders = true,
+    bool isRegister = false,
   }) async {
     //preparing the api uri/url
     String uri = "$host$url";
     //preparing the post options if header is required
     final mOptions =
-        !includeHeaders ? null : Options(headers: await getHeaders());
+        !includeHeaders ? null : Options(headers: await getHeaders(isRegister: isRegister));
 
     Response response;
 

@@ -26,6 +26,12 @@ class Api {
   static const verifyOtp = "/otp/verify";
   static const verifyFirebaseOtp = "/otp/firebase/verify";
 
+  //
+  static const continueToEarn = "/partner/referral";
+  static const driverDocs = "/partner/document";
+  static const driverTax = "/partner/tax_info";
+  static const driverCheck = "/partner/status";
+
   static const orders = "/orders";
   static const orderStopVerification = "/package/order/stop/verify";
   static const chat = "/chat/notification";

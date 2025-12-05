@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
+
 // Removed Firebase Messaging import
 import 'package:flutter/material.dart';
 import 'package:flutter_background/flutter_background.dart';
@@ -9,12 +10,15 @@ import 'package:fuodz/constants/app_colors.dart';
 import 'package:fuodz/constants/app_routes.dart';
 import 'package:fuodz/constants/app_strings.dart';
 import 'package:fuodz/constants/app_theme.dart';
+import 'package:fuodz/requests/auth.request.dart';
 import 'package:fuodz/requests/settings.request.dart';
 import 'package:fuodz/services/auth.service.dart';
 import 'package:fuodz/services/custom_video_call.service.dart';
+import 'package:fuodz/services/local_storage.service.dart';
 
 import 'package:fuodz/services/websocket.service.dart';
 import 'package:fuodz/utils/utils.dart';
+import 'package:fuodz/views/pages/auth/register/waiting_page.dart';
 import 'package:fuodz/views/pages/permission/permission.page.dart';
 import 'package:fuodz/widgets/cards/language_selector.view.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -109,9 +113,46 @@ class SplashViewModel extends MyBaseViewModel {
         viewContext,
       ).pushNamedAndRemoveUntil(AppRoutes.welcomeRoute, (route) => false);
     } else if (!AuthServices.authenticated()) {
-      Navigator.of(
-        viewContext,
-      ).pushNamedAndRemoveUntil(AppRoutes.loginRoute, (route) => false);
+      // Here make the driver check
+      if(await LocalStorageService.prefs!.getBool(AppStrings.driverWaiting) ?? false){
+
+        AuthRequest authRequest = AuthRequest();
+        final apiResponse = await authRequest.driverCheck();
+
+        if (apiResponse.body['success'] && apiResponse.body['code'] == 200) {
+          if (apiResponse.body['data'] == 'UNDER_REVIEW') {
+
+            Navigator.of(viewContext).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => WaitingPage(
+                  name: LocalStorageService.prefs!.getString(AppStrings.driverName) ?? 'Driver',
+              )),
+                  (route) => false,
+            );
+          } else {
+            await LocalStorageService.prefs!.setBool(
+              AppStrings.driverWaiting,
+              false,
+            );
+            if(apiResponse.message != null){
+              ScaffoldMessenger.of(viewContext).showSnackBar(
+                SnackBar(content: Text(apiResponse.message!), duration: const Duration(seconds: 2)),
+              );
+            }
+            Navigator.of(
+              viewContext,
+            ).pushNamedAndRemoveUntil(AppRoutes.loginRoute, (route) => false);
+          }
+        } else {
+          Navigator.of(
+            viewContext,
+          ).pushNamedAndRemoveUntil(AppRoutes.loginRoute, (route) => false);
+        }
+      } else {
+        Navigator.of(
+          viewContext,
+        ).pushNamedAndRemoveUntil(AppRoutes.loginRoute, (route) => false);
+      }
+
     } else {
       await AuthServices().initData();
 

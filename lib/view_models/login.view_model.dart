@@ -6,10 +6,13 @@ import 'package:fuodz/requests/auth.request.dart';
 import 'package:fuodz/services/auth.service.dart';
 import 'package:fuodz/services/firebase_token.service.dart';
 import 'package:fuodz/view_models/base.view_model.dart';
+import 'package:fuodz/views/pages/auth/register/agreement_page.dart';
 import 'package:fuodz/views/pages/permission/permission.page.dart';
 import 'package:fuodz/services/zego_video_call.service.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../views/pages/auth/register/register.page.dart';
 
 class LoginViewModel extends MyBaseViewModel {
   //
@@ -105,7 +108,10 @@ class LoginViewModel extends MyBaseViewModel {
 
   // Additional missing methods
   openRegistrationlink() {
-    toastError("Registration disabled".tr());
+    // toastError("Registration disabled".tr());
+    Navigator.of(
+      viewContext,
+    ).push(MaterialPageRoute(builder: (ctx) => RegisterPage()));
   }
 
   openForgotPassword() {

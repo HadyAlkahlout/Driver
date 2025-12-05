@@ -29,7 +29,7 @@ class OnboardingViewModel extends MyBaseViewModel {
         color: bgColor,
         titleColor: textColor,
         bodyColor: textColor,
-        imageAssetPath: AppImages.onboarding1,
+        imageAssetPath: AppImages.onboarding3,
         title: "Delivery made easy".tr(),
         body: "Get notified as soon as an order is available for delivery".tr(),
         doAnimateImage: true,
@@ -38,7 +38,7 @@ class OnboardingViewModel extends MyBaseViewModel {
         color: bgColor,
         titleColor: textColor,
         bodyColor: textColor,
-        imageAssetPath: AppImages.onboarding2,
+        imageAssetPath: AppImages.onboarding3,
         title: "Chat with vendor/customer".tr(),
         body:
             "Call/Chat with vendor/delivery boy for update about your order and more"

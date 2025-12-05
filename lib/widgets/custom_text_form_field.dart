@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fuodz/constants/app_colors.dart';
 import 'package:fuodz/constants/input.styles.dart';
@@ -27,6 +28,7 @@ class CustomTextFormField extends StatefulWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.underline = false,
+    this.inputFormatters,
   }) : super(key: key);
 
   //
@@ -57,6 +59,7 @@ class CustomTextFormField extends StatefulWidget {
   final Widget? suffixIcon;
 
   final bool underline;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
@@ -91,6 +94,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       obscureText: (widget.obscureText) ? !makePasswordVisible : false,
       onTap: widget.onTap,
       readOnly: widget.isReadOnly,
+      inputFormatters: widget.inputFormatters,
       controller: widget.textEditingController,
       validator: widget.validator,
       focusNode: widget.focusNode,

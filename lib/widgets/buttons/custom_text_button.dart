@@ -24,19 +24,19 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: this.onPressed != null ? () => this.onPressed!() : null,
-      style: TextButton.styleFrom(
-        padding: this.padding,
-      ),
-      child: loading
-          ? Center(
-              child: BusyIndicator(),
-            )
-          : Text(
-              this.title,
-              style: AppTextStyle.h4TitleTextStyle(
-                color: titleColor ?? AppColor.primaryColor,
+      style: TextButton.styleFrom(padding: this.padding),
+      child:
+          loading
+              ? Center(child: BusyIndicator())
+              : Text(
+                this.title,
+                style:
+                    titleColor == null
+                        ? Theme.of(context).textTheme.bodyMedium
+                        : AppTextStyle.h4TitleTextStyle(
+                          color: titleColor ?? AppColor.primaryColor,
+                        ),
               ),
-            ),
     );
   }
 }

@@ -203,7 +203,7 @@ class _TranslationSettingsWidgetState extends State<TranslationSettingsWidget> {
               Switch(
                 value: _autoTranslateEnabled,
                 onChanged: _toggleAutoTranslate,
-                activeColor: AppColor.primaryColor,
+                activeThumbColor: AppColor.primaryColor,
               ),
             ],
           ),

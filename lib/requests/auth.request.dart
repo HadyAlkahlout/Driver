@@ -23,6 +23,22 @@ class AuthRequest extends HttpService {
     return ApiResponse.fromResponse(apiResult);
   }
 
+  Future<ApiResponse> newRegisterRequest({
+    required Map<String, dynamic> vals,
+  }) async {
+    final apiResult = await post(Api.newAccount, vals);
+    //
+    return ApiResponse.fromResponse(apiResult);
+  }
+
+  Future<ApiResponse> verifyPinRequest({
+    required Map<String, dynamic> vals,
+  }) async {
+    final apiResult = await post(Api.newAccount, vals);
+    //
+    return ApiResponse.fromResponse(apiResult);
+  }
+
   Future<ApiResponse> registerRequest({
     required Map<String, dynamic> vals,
     List<File>? docs,
@@ -146,7 +162,7 @@ class AuthRequest extends HttpService {
 
   Future<ApiResponse> sendOTP(
     String phoneNumber, {
-    bool isLogin = false,
+    bool isLogin = true,
   }) async {
     final apiResult = await post(Api.sendOtp, {
       "phone": phoneNumber,
@@ -160,16 +176,34 @@ class AuthRequest extends HttpService {
     }
   }
 
+  Future<ApiResponse> newSendOTP(
+    String phoneNumber,
+    String countryCode, {
+    String isLogin = 'yes',
+  }) async {
+    final apiResult = await post(Api.sendOtp, {
+      "phone": phoneNumber,
+      "country_code": countryCode,
+      "is_login": isLogin,
+    }, includeHeaders: true);
+    final apiResponse = ApiResponse.fromResponse(apiResult);
+    if (apiResponse.allGood) {
+      return apiResponse;
+    } else {
+      throw "${apiResponse.message}";
+    }
+  }
+
   Future<ApiResponse> verifyOTP(
     String phoneNumber,
     String code, {
-    bool isLogin = false,
+    bool isLogin = true,
   }) async {
     final apiResult = await post(Api.verifyOtp, {
       "phone": phoneNumber,
       "code": code,
       "is_login": isLogin,
-    });
+    }, includeHeaders: true);
     final apiResponse = ApiResponse.fromResponse(apiResult);
     if (apiResponse.allGood) {
       return apiResponse;
@@ -237,4 +271,60 @@ class AuthRequest extends HttpService {
     });
     return ApiResponse.fromResponse(apiResult);
   }
+
+  Future<ApiResponse> continueToEarn(Map<String, dynamic> vals) async {
+    final apiResult = await post(Api.continueToEarn, vals, includeHeaders: true, isRegister: true);
+    final apiResponse = ApiResponse.fromResponse(apiResult);
+    if (apiResponse.allGood) {
+      return apiResponse;
+    } else {
+      throw "${apiResponse.message}";
+    }
+  }
+
+  Future<ApiResponse> uploadDriverDocs(FormData formData) async {
+    final apiResult = await postCustomFiles(
+      Api.driverDocs,
+      null,
+      formData: formData,
+      includeHeaders: true,
+    );
+    return ApiResponse.fromResponse(apiResult);
+  }
+
+  Future<ApiResponse> sendTaxInfo(Map<String, dynamic> vals) async {
+    final apiResult = await post(Api.driverTax, vals, includeHeaders: true, isRegister: true);
+    final apiResponse = ApiResponse.fromResponse(apiResult);
+    if (apiResponse.allGood) {
+      return apiResponse;
+    } else {
+      throw "${apiResponse.message}";
+    }
+  }
+
+  Future<ApiResponse> uploadTaxDoc(String path, String name) async {
+    FormData formData = FormData.fromMap({
+      "tax_file": await MultipartFile.fromFile(path, filename: name),
+    });
+    final apiResult = await postCustomFiles(
+      Api.driverTax,
+      null,
+      formData: formData,
+      includeHeaders: true,
+      isRegister: true,
+    );
+    return ApiResponse.fromResponse(apiResult);
+  }
+
+  Future<ApiResponse> driverCheck() async {
+    final apiResult = await post(
+      Api.driverCheck,
+      null,
+      includeHeaders: true,
+      isRegister: true,
+    );
+    return ApiResponse.fromResponse(apiResult);
+  }
+
+
 }

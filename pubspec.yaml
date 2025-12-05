@@ -21,6 +21,13 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
+
+  # Hady's Edit
+  pinput: ^5.0.2
+  fluttertoast: ^8.2.4
+  webview_flutter: ^4.5.0
+  flutter_pdfview: ^1.2.7
+
   adaptive_theme: ^3.7.0
   zego_uikit_prebuilt_call: 4.16.23
   zego_uikit_signaling_plugin: ^2.8.3
@@ -167,3 +174,5 @@ flutter:
     - assets/audio/
     - assets/json/
     - assets/lang/
+    - assets/pdf/
+    - assets/pdf/agreement.pdf
