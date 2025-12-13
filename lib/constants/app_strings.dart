@@ -78,6 +78,12 @@ class AppStrings {
   static String driverVehicleKey = "driver_vehicle";
   static String driverWaiting = "driver_waiting";
   static String driverName = "driver_name";
+  static String driverPhone = "driver_phone";
+  static String driverPhoneCode = "driver_phone_code";
+  static String driverCountryCode = "driver_country_code";
+  static String driverCity = "driver_city";
+  static String registerStage = "register_stage";
+  static String paymentLink = "payment_link";
   static String appLocale = "locale";
   static String notificationsKey = "notifications";
   static String appCurrency = "currency";

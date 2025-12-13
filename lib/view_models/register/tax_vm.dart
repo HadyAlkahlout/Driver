@@ -1,6 +1,8 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:fuodz/constants/app_strings.dart';
 import 'package:fuodz/requests/auth.request.dart';
+import 'package:fuodz/services/local_storage.service.dart';
 import 'package:fuodz/view_models/base.view_model.dart';
 import 'package:fuodz/views/pages/auth/register/payment_page.dart';
 import 'package:image_picker/image_picker.dart';
@@ -61,6 +63,7 @@ class TaxVM extends MyBaseViewModel {
         if (apiResponse.body['status'] && apiResponse.body['code'] == 200) {
           showSnackBar(apiResponse.message ?? "Success");
           print(apiResponse.body['url']);
+          await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 5);
           Navigator.of(viewContext).push(
             MaterialPageRoute(
               builder:

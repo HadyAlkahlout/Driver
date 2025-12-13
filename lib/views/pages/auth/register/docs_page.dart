@@ -68,10 +68,14 @@ class DocsPage extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineLarge
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            name,
-                            style: Theme.of(context).textTheme.headlineLarge
-                                ?.copyWith(fontWeight: FontWeight.bold),
+                          Expanded(
+                            child: Text(
+                              name,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: Theme.of(context).textTheme.headlineLarge
+                                  ?.copyWith(fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ],
                       ),
@@ -142,288 +146,458 @@ class DocsPage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              GestureDetector(
-                                onTap: () => openDocs(context, model, 1),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    spacing: 8,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              'Driver’s License (government ID)'.tr(),
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.bodyMedium,
-                                            ),
-                                          ),
-                                          Icon(Icons.arrow_forward_ios, size: 16),
-                                        ],
-                                      ),
-                                      Visibility(
-                                        visible: model.driversLicense.isNotEmpty,
-                                        child: Row(
+                              Visibility(
+                                visible: true,
+                                child: Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () => openDocs(context, model, 1),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          spacing: 8,
                                           children: [
-                                            Text(
-                                              'Click again to choose a new file'.tr(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(color: Colors.grey),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    'Driver’s License (government ID)'.tr(),
+                                                    style:
+                                                        Theme.of(
+                                                          context,
+                                                        ).textTheme.bodyMedium,
+                                                  ),
+                                                ),
+                                                Icon(Icons.arrow_forward_ios, size: 16),
+                                              ],
                                             ),
-                                            Spacer(),
-                                            Expanded(child: Text(model.driversLicenseName, style: TextStyle(fontSize: 12))),
+                                            Visibility(
+                                              visible: model.driversLicense.isNotEmpty,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    'Click again to choose a new file'.tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.grey),
+                                                  ),
+                                                  Spacer(),
+                                                  Expanded(child: Text(model.driversLicenseName, style: TextStyle(fontSize: 12))),
+                                                ],
+                                              ),
+                                            ),
+                                            Visibility(
+                                              visible: false,
+                                              child: Row(
+                                                spacing: 4,
+                                                children: [
+                                                  Text(
+                                                    'Rejected;'.tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.red),
+                                                  ),
+                                                  Text(
+                                                    'Reason',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.red),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Divider(
+                                      height: 24,
+                                      color: Colors.grey.withOpacity(0.2),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Divider(
-                                height: 24,
-                                color: Colors.grey.withOpacity(0.2),
-                              ),
-                              GestureDetector(
-                                onTap: () => openDocs(context, model, 2),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    spacing: 8,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              'Vehicle Registration (if using a car)'.tr(),
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.bodyMedium,
-                                            ),
-                                          ),
-                                          Icon(Icons.arrow_forward_ios, size: 16),
-                                        ],
-                                      ),
-                                      Visibility(
-                                        visible:
-                                            model.vehicleRegistration.isNotEmpty,
-                                        child: Row(
+                              Visibility(
+                                visible: true,
+                                child: Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () => openDocs(context, model, 2),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          spacing: 8,
                                           children: [
-                                            Text(
-                                              'Click again to choose a new file'.tr(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(color: Colors.grey),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    'Vehicle Registration (if using a car)'.tr(),
+                                                    style:
+                                                        Theme.of(
+                                                          context,
+                                                        ).textTheme.bodyMedium,
+                                                  ),
+                                                ),
+                                                Icon(Icons.arrow_forward_ios, size: 16),
+                                              ],
                                             ),
-                                            Spacer(),
-                                            Expanded(child: Text(model.vehicleRegistrationName, style: TextStyle(fontSize: 12))),
+                                            Visibility(
+                                              visible:
+                                                  model.vehicleRegistration.isNotEmpty,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    'Click again to choose a new file'.tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.grey),
+                                                  ),
+                                                  Spacer(),
+                                                  Expanded(child: Text(model.vehicleRegistrationName, style: TextStyle(fontSize: 12))),
+                                                ],
+                                              ),
+                                            ),
+                                            Visibility(
+                                              visible: false,
+                                              child: Row(
+                                                spacing: 4,
+                                                children: [
+                                                  Text(
+                                                    'Rejected;'.tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.red),
+                                                  ),
+                                                  Text(
+                                                    'Reason',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.red),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Divider(
+                                      height: 24,
+                                      color: Colors.grey.withOpacity(0.2),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Divider(
-                                height: 24,
-                                color: Colors.grey.withOpacity(0.2),
-                              ),
-                              GestureDetector(
-                                onTap: () => openDocs(context, model, 3),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    spacing: 8,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              'Insurance document'.tr(),
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.bodyMedium,
-                                            ),
-                                          ),
-                                          Icon(Icons.arrow_forward_ios, size: 16),
-                                        ],
-                                      ),
-                                      Visibility(
-                                        visible: model.insuranceDoc.isNotEmpty,
-                                        child: Row(
+                              Visibility(
+                                visible: true,
+                                child: Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () => openDocs(context, model, 3),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          spacing: 8,
                                           children: [
-                                            Text(
-                                              'Click again to choose a new file'.tr(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(color: Colors.grey),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    'Insurance document'.tr(),
+                                                    style:
+                                                        Theme.of(
+                                                          context,
+                                                        ).textTheme.bodyMedium,
+                                                  ),
+                                                ),
+                                                Icon(Icons.arrow_forward_ios, size: 16),
+                                              ],
                                             ),
-                                            Spacer(),
-                                            Expanded(child: Text(model.insuranceDocName, style: TextStyle(fontSize: 12))),
+                                            Visibility(
+                                              visible: model.insuranceDoc.isNotEmpty,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    'Click again to choose a new file'.tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.grey),
+                                                  ),
+                                                  Spacer(),
+                                                  Expanded(child: Text(model.insuranceDocName, style: TextStyle(fontSize: 12))),
+                                                ],
+                                              ),
+                                            ),
+                                            Visibility(
+                                              visible: false,
+                                              child: Row(
+                                                spacing: 4,
+                                                children: [
+                                                  Text(
+                                                    'Rejected;'.tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.red),
+                                                  ),
+                                                  Text(
+                                                    'Reason',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.red),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Divider(
+                                      height: 24,
+                                      color: Colors.grey.withOpacity(0.2),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Divider(
-                                height: 24,
-                                color: Colors.grey.withOpacity(0.2),
-                              ),
-                              GestureDetector(
-                                onTap: () => openDocs(context, model, 4),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    spacing: 8,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              'Selfie photo holding their ID (for face match)'.tr(),
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.bodyMedium,
-                                            ),
-                                          ),
-                                          Icon(Icons.arrow_forward_ios, size: 16),
-                                        ],
-                                      ),
-                                      Visibility(
-                                        visible: model.selfiePhoto.isNotEmpty,
-                                        child: Row(
+                              Visibility(
+                                visible: true,
+                                child: Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () => openDocs(context, model, 4),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          spacing: 8,
                                           children: [
-                                            Text(
-                                              'Click again to choose a new file'.tr(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(color: Colors.grey),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    'Selfie photo holding their ID (for face match)'.tr(),
+                                                    style:
+                                                        Theme.of(
+                                                          context,
+                                                        ).textTheme.bodyMedium,
+                                                  ),
+                                                ),
+                                                Icon(Icons.arrow_forward_ios, size: 16),
+                                              ],
                                             ),
-                                            Spacer(),
-                                            Expanded(child: Text(model.selfiePhotoName, style: TextStyle(fontSize: 12))),
+                                            Visibility(
+                                              visible: model.selfiePhoto.isNotEmpty,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    'Click again to choose a new file'.tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.grey),
+                                                  ),
+                                                  Spacer(),
+                                                  Expanded(child: Text(model.selfiePhotoName, style: TextStyle(fontSize: 12))),
+                                                ],
+                                              ),
+                                            ),
+                                            Visibility(
+                                              visible: false,
+                                              child: Row(
+                                                spacing: 4,
+                                                children: [
+                                                  Text(
+                                                    'Rejected;'.tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.red),
+                                                  ),
+                                                  Text(
+                                                    'Reason',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.red),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Divider(
+                                      height: 24,
+                                      color: Colors.grey.withOpacity(0.2),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Divider(
-                                height: 24,
-                                color: Colors.grey.withOpacity(0.2),
-                              ),
-                              // GestureDetector(
-                              //   onTap: () => openDocs(context, model, 5),
-                              //   child: Padding(
-                              //     padding: const EdgeInsets.symmetric(
-                              //       vertical: 8.0,
-                              //     ),
-                              //     child: Column(
-                              //       crossAxisAlignment: CrossAxisAlignment.start,
-                              //       spacing: 8,
-                              //       children: [
-                              //         Row(
-                              //           children: [
-                              //             Expanded(
-                              //               child: Text(
-                              //                 'Criminal record'.tr(),
-                              //                 style:
-                              //                     Theme.of(
-                              //                       context,
-                              //                     ).textTheme.bodyMedium,
-                              //               ),
-                              //             ),
-                              //             Icon(Icons.arrow_forward_ios, size: 16),
-                              //           ],
-                              //         ),
-                              //         Visibility(
-                              //           visible: model.criminalRecords.isNotEmpty,
-                              //           child: Row(
-                              //             children: [
-                              //               Text(
-                              //                 'Click again to choose a new file'.tr(),
-                              //                 style: Theme.of(context)
-                              //                     .textTheme
-                              //                     .bodySmall
-                              //                     ?.copyWith(color: Colors.grey),
-                              //               ),
-                              //               Spacer(),
-                              //               Expanded(child: Text(model.criminalRecordsName, style: TextStyle(fontSize: 12))),
-                              //             ],
-                              //           ),
-                              //         ),
-                              //       ],
-                              //     ),
-                              //   ),
-                              // ),
-                              // Divider(
-                              //   height: 24,
-                              //   color: Colors.grey.withOpacity(0.2),
-                              // ),
-                              GestureDetector(
-                                onTap: () => openDocs(context, model, 6),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    spacing: 8,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              'Vehicle check report (Optional)'.tr(),
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.bodyMedium,
-                                            ),
-                                          ),
-                                          Icon(Icons.arrow_forward_ios, size: 16),
-                                        ],
-                                      ),
-                                      Visibility(
-                                        visible: model.vehicleCheck.isNotEmpty,
-                                        child: Row(
+                              Visibility(
+                                visible: false,
+                                child: Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () => openDocs(context, model, 5),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          spacing: 8,
                                           children: [
-                                            Text(
-                                              'Click again to choose a new file'.tr(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(color: Colors.grey),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    'Criminal record'.tr(),
+                                                    style:
+                                                        Theme.of(
+                                                          context,
+                                                        ).textTheme.bodyMedium,
+                                                  ),
+                                                ),
+                                                Icon(Icons.arrow_forward_ios, size: 16),
+                                              ],
                                             ),
-                                            Spacer(),
-                                            Expanded(child: Text(model.vehicleCheckName, style: TextStyle(fontSize: 12))),
+                                            Visibility(
+                                              visible: model.criminalRecords.isNotEmpty,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    'Click again to choose a new file'.tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.grey),
+                                                  ),
+                                                  Spacer(),
+                                                  Expanded(child: Text(model.criminalRecordsName, style: TextStyle(fontSize: 12))),
+                                                ],
+                                              ),
+                                            ),
+                                            Visibility(
+                                              visible: false,
+                                              child: Row(
+                                                spacing: 4,
+                                                children: [
+                                                  Text(
+                                                    'Rejected;'.tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.red),
+                                                  ),
+                                                  Text(
+                                                    'Reason',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodySmall
+                                                        ?.copyWith(color: Colors.red),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    ],
+                                    ),
+                                    Divider(
+                                      height: 24,
+                                      color: Colors.grey.withOpacity(0.2),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Visibility(
+                                visible: true,
+                                child: GestureDetector(
+                                  onTap: () => openDocs(context, model, 6),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 8.0,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      spacing: 8,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                'Vehicle check report (Optional)'.tr(),
+                                                style:
+                                                    Theme.of(
+                                                      context,
+                                                    ).textTheme.bodyMedium,
+                                              ),
+                                            ),
+                                            Icon(Icons.arrow_forward_ios, size: 16),
+                                          ],
+                                        ),
+                                        Visibility(
+                                          visible: model.vehicleCheck.isNotEmpty,
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                'Click again to choose a new file'.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall
+                                                    ?.copyWith(color: Colors.grey),
+                                              ),
+                                              Spacer(),
+                                              Expanded(child: Text(model.vehicleCheckName, style: TextStyle(fontSize: 12))),
+                                            ],
+                                          ),
+                                        ),
+                                        Visibility(
+                                          visible: false,
+                                          child: Row(
+                                            spacing: 4,
+                                            children: [
+                                              Text(
+                                                'Rejected;'.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall
+                                                    ?.copyWith(color: Colors.red),
+                                              ),
+                                              Text(
+                                                'Reason',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall
+                                                    ?.copyWith(color: Colors.red),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

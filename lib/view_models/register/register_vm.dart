@@ -9,6 +9,9 @@ import 'package:fuodz/views/pages/auth/register/pin_page.dart';
 import 'package:intl/intl.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 
+import '../../constants/app_strings.dart';
+import '../../services/local_storage.service.dart';
+
 class RegisterViewModel extends MyBaseViewModel {
   //
   AuthRequest authRequest = AuthRequest();
@@ -81,6 +84,26 @@ class RegisterViewModel extends MyBaseViewModel {
           print('Test Message: ${apiResponse.body['message']}');
           print('Test Token: ${apiResponse.body['temp_token']}');
           await AuthServices.setAuthBearerToken(apiResponse.body["temp_token"]);
+
+          await LocalStorageService.prefs!.setBool(AppStrings.driverWaiting, true);
+          await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 1);
+          await LocalStorageService.prefs!.setString(
+            AppStrings.driverName,
+            nameTEC.text,
+          );
+          await LocalStorageService.prefs!.setString(
+            AppStrings.driverPhone,
+            phoneTEC.text,
+          );
+          await LocalStorageService.prefs!.setString(
+            AppStrings.driverPhoneCode,
+            selectedCountry?.phoneCode ?? "",
+          );
+          await LocalStorageService.prefs!.setString(
+            AppStrings.driverCountryCode,
+            selectedCountry?.countryCode ?? "",
+          );
+
           showSnackBar(
               apiResponse.message ?? "Account created successfully".tr());
           Navigator.of(viewContext).push(

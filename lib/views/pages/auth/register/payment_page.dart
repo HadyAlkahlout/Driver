@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fuodz/constants/app_strings.dart';
+import 'package:fuodz/services/local_storage.service.dart';
 import 'package:fuodz/views/pages/auth/register/agreement_page.dart';
 import 'package:fuodz/widgets/base.page.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -19,9 +21,9 @@ class _PaymentPageState extends State<PaymentPage> {
   late final WebViewController _controller;
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
-
+    await LocalStorageService.prefs!.setString(AppStrings.paymentLink, widget.paymentLink);
     _controller =
         WebViewController()
           ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -61,14 +63,15 @@ class _PaymentPageState extends State<PaymentPage> {
       title: 'E2U',
 
       // Remove this line after testing payment
-      actions: [IconButton(onPressed: _finish, icon: Icon(Icons.check)),],
-
+      // actions: [IconButton(onPressed: _finish, icon: Icon(Icons.check)),],
+      
       backgroundColor: context.theme.colorScheme.surface,
       body: WebViewWidget(controller: _controller),
     );
   }
   
-  void _finish(){
+  void _finish() async{
+    await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 6);
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (context) => AgreementPage(name: widget.name),

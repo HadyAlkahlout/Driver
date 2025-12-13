@@ -65,40 +65,45 @@ class _AgreementPageState extends State<AgreementPage> {
           ),
 
           SizedBox(height: 16),
-          Row(
-            children: [
-              Checkbox(
-                value: agree,
-                onChanged: (value) {
-                  setState(() {
-                    agree = value!;
-                  });
-                },
-              ),
-              Expanded(child: Text('I agree to these terms'.tr())),
-              GestureDetector(
-                onTap: () {
-                  goNext();
-                },
-                child: Card(
-                  color: Vx.gray200.withOpacity(0.3),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Next'.tr()),
-                        SizedBox(width: 8),
-                        Icon(Icons.arrow_forward_ios),
-                      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
+            ),
+            child: Row(
+              children: [
+                Checkbox(
+                  value: agree,
+                  onChanged: (value) {
+                    setState(() {
+                      agree = value!;
+                    });
+                  },
+                ),
+                Expanded(child: Text('I agree to these terms'.tr())),
+                GestureDetector(
+                  onTap: () {
+                    goNext();
+                  },
+                  child: Card(
+                    color: Vx.gray200.withOpacity(0.3),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('Next'.tr()),
+                          SizedBox(width: 8),
+                          Icon(Icons.arrow_forward_ios),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           SizedBox(height: 24),
         ],
@@ -120,11 +125,7 @@ class _AgreementPageState extends State<AgreementPage> {
 
   void goNext() async {
     if (agree) {
-      await LocalStorageService.prefs!.setBool(AppStrings.driverWaiting, true);
-      await LocalStorageService.prefs!.setString(
-        AppStrings.driverName,
-        widget.name,
-      );
+      await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 7);
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => WaitingPage(name: widget.name)),
         (route) => false,

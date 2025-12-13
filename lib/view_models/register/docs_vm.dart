@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:fuodz/constants/app_strings.dart';
 import 'package:fuodz/models/api_response.dart';
 import 'package:fuodz/requests/auth.request.dart';
+import 'package:fuodz/services/local_storage.service.dart';
 import 'package:fuodz/view_models/base.view_model.dart';
 import 'package:fuodz/views/pages/auth/register/tax_page.dart';
 import 'package:image_picker/image_picker.dart';
@@ -152,6 +154,7 @@ class DocsVM extends MyBaseViewModel {
         isLoading = false;
         notifyListeners();
         showSnackBar(viewContext, apiResponse.message ?? 'Success');
+        await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 4);
         Navigator.of(viewContext).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => TaxPage(name: name)),
           (route) => false,

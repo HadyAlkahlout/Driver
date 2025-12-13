@@ -3,10 +3,24 @@ import 'package:fuodz/widgets/base.page.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class WaitingPage extends StatelessWidget {
+class WaitingPage extends StatefulWidget {
   const WaitingPage({required this.name, Key? key}) : super(key: key);
 
   final String name;
+
+  @override
+  State<WaitingPage> createState() => _WaitingPageState();
+}
+
+class _WaitingPageState extends State<WaitingPage> {
+
+  @override
+  void initState() {
+    super.initState();
+
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +42,11 @@ class WaitingPage extends StatelessWidget {
                 Image.asset('assets/images/waiting.jpg'),
                 SizedBox(height: 20.0),
                 Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Thank you for registering with us'.tr()),
-                    Text(', $name!'),
+                    Text(', ${widget.name}!'),
                   ],
                 ),
                 SizedBox(height: 4.0),
