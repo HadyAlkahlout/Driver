@@ -19,25 +19,34 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   late final WebViewController _controller;
+  bool isLoading = false;
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    await LocalStorageService.prefs!.setString(AppStrings.paymentLink, widget.paymentLink);
+    LocalStorageService.prefs!.setString(AppStrings.paymentLink, widget.paymentLink);
     _controller =
         WebViewController()
           ..setJavaScriptMode(JavaScriptMode.unrestricted)
           // Track every navigation event
           ..setNavigationDelegate(
             NavigationDelegate(
+              onProgress: (progress){
+                setState(() {
+                  isLoading = true;
+                });
+              },
               onPageStarted: (url) {
                 print("Page started loading: $url");
-                if (url.contains("success")) {
-                  _finish();
-                }
               },
               onPageFinished: (url) {
                 print("Page finished loading: $url");
+                if (url.contains("success")) {
+                  _finish();
+                }
+                setState(() {
+                  isLoading = false;
+                });
               },
               onNavigationRequest: (NavigationRequest request) {
                 print("User clicked link: ${request.url}");
@@ -66,7 +75,18 @@ class _PaymentPageState extends State<PaymentPage> {
       // actions: [IconButton(onPressed: _finish, icon: Icon(Icons.check)),],
       
       backgroundColor: context.theme.colorScheme.surface,
-      body: WebViewWidget(controller: _controller),
+      body: Stack(
+        children: [
+          WebViewWidget(controller: _controller),
+          if (isLoading)
+            Container(
+              color: Colors.black.withOpacity(0.5),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+        ],
+      ),
     );
   }
   

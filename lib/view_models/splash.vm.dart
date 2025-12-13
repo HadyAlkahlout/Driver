@@ -152,7 +152,7 @@ class SplashViewModel extends MyBaseViewModel {
                 (route) => false,
               );
             }
-            else if(apiResponse.body['data'] == 'SOME_REJECTE'){
+            else if(apiResponse.body['data'] == 'SOME_REJECTED'){
               Navigator.of(viewContext).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) =>
                     DocsPage(
