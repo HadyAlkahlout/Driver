@@ -119,7 +119,8 @@ class SplashViewModel extends MyBaseViewModel {
       Navigator.of(
         viewContext,
       ).pushNamedAndRemoveUntil(AppRoutes.welcomeRoute, (route) => false);
-    } else if (!AuthServices.authenticated()) {
+    }
+    else if (!AuthServices.authenticated()) {
       // Here make the driver check
       if (await LocalStorageService.prefs!.getBool(AppStrings.driverWaiting) ??
           false) {
@@ -132,7 +133,11 @@ class SplashViewModel extends MyBaseViewModel {
             if (apiResponse.message != null) {
               ScaffoldMessenger.of(viewContext).showSnackBar(
                 SnackBar(
-                  content: Text(apiResponse.message!),
+                  content: Text(apiResponse.message!,
+                    style: Theme.of(
+                      viewContext,
+                    ).textTheme.bodyMedium!.copyWith(color: Colors.white),
+                  ),
                   duration: const Duration(seconds: 2),
                 ),
               );
@@ -152,7 +157,7 @@ class SplashViewModel extends MyBaseViewModel {
                 (route) => false,
               );
             }
-            else if(apiResponse.body['data'] == 'SOME_REJECTED'){
+            else if(apiResponse.body['rejected_files'] != null){
               Navigator.of(viewContext).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) =>
                     DocsPage(
@@ -161,6 +166,8 @@ class SplashViewModel extends MyBaseViewModel {
                           'Driver',
                       city:
                       LocalStorageService.prefs!.getString(AppStrings.driverCity) ?? '',
+                      isEdit: true,
+                      rejectedFiles: apiResponse.body['rejected_files'],
                     )),
                     (route) => false,
               );

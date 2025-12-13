@@ -389,6 +389,7 @@
   "Please agree to the agreement": "Veuillez accepter l'accord !!",
   "Thank you for registering with us": "Merci de vous être inscrit chez nous",
   "Please wait while we process your registration": "Veuillez patienter pendant que nous traitons votre inscription.",
-  "You can leave the app now and we will notify you when we finish the process": "Vous pouvez quitter l'application maintenant et nous vous informerons lorsque nous aurons terminé le processus"
-
+  "You can leave the app now and we will notify you when we finish the process": "Vous pouvez quitter l'application maintenant et nous vous informerons lorsque nous aurons terminé le processus",
+  "Rejected;": "Rejected;",
+  "Upload new file": "Upload new file"
 }

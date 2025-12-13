@@ -306,6 +306,7 @@
   "Please agree to the agreement": "请同意此协议",
   "Thank you for registering with us": "感谢您的注册",
   "Please wait while we process your registration": "我们正在处理您的注册，请稍候",
-  "You can leave the app now and we will notify you when we finish the process": "您现在可以退出应用，我们完成后会通知您"
-
+  "You can leave the app now and we will notify you when we finish the process": "您现在可以退出应用，我们完成后会通知您",
+  "Rejected;": "Rejected;",
+  "Upload new file": "Upload new file"
 }

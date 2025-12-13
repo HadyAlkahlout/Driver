@@ -53,6 +53,7 @@ class LoginViewModel extends MyBaseViewModel {
           if (token != null) {
             await FirebaseTokenService.instance.syncDeviceTokenWithServer(
               token,
+              false
             );
           }
         } catch (e) {

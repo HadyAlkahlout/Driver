@@ -1,12 +1,16 @@
+import 'dart:ffi';
+
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fuodz/constants/app_strings.dart';
 import 'package:fuodz/models/api_response.dart';
+import 'package:fuodz/models/register/rejected_files.dart';
 import 'package:fuodz/requests/auth.request.dart';
 import 'package:fuodz/services/local_storage.service.dart';
 import 'package:fuodz/view_models/base.view_model.dart';
 import 'package:fuodz/views/pages/auth/register/tax_page.dart';
+import 'package:fuodz/views/pages/auth/register/waiting_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 
@@ -16,28 +20,37 @@ class DocsVM extends MyBaseViewModel {
   //
   AuthRequest authRequest = AuthRequest();
 
+  bool isEdit = false;
+
   String driversLicense = '';
+  bool showDriversLicense = true;
   String driversLicenseName = '';
 
   String vehicleRegistration = '';
+  bool showVehicleRegistration = true;
   String vehicleRegistrationName = '';
 
   String insuranceDoc = '';
+  bool showInsuranceDoc = true;
   String insuranceDocName = '';
 
   String selfiePhoto = '';
+  bool showSelfiePhoto = true;
   String selfiePhotoName = '';
 
   String criminalRecords = '';
+  bool showCriminalRecords = false;
   String criminalRecordsName = '';
 
   String vehicleCheck = '';
+  bool showVehicleCheck = true;
   String vehicleCheckName = '';
 
   bool isLoading = false;
 
-  DocsVM(BuildContext context) {
+  DocsVM(BuildContext context, bool isEdit) {
     this.viewContext = context;
+    this.isEdit = isEdit;
   }
 
   int getProgressValue() {
@@ -116,24 +129,23 @@ class DocsVM extends MyBaseViewModel {
     notifyListeners();
 
     final formData = FormData.fromMap({
-      "driver_license": await MultipartFile.fromFile(
+      if(showDriversLicense) "driver_license": await MultipartFile.fromFile(
         driversLicense,
         filename: driversLicenseName,
       ),
-      "vehicle_registration": await MultipartFile.fromFile(
+      if(showVehicleRegistration) "vehicle_registration": await MultipartFile.fromFile(
         vehicleRegistration,
         filename: vehicleRegistrationName,
       ),
-      "insurance_document": await MultipartFile.fromFile(
+      if(showInsuranceDoc) "insurance_document": await MultipartFile.fromFile(
         insuranceDoc,
         filename: insuranceDocName,
       ),
-      "selfie_photo_id": await MultipartFile.fromFile(
+      if(showSelfiePhoto) "selfie_photo_id": await MultipartFile.fromFile(
         selfiePhoto,
         filename: selfiePhotoName,
       ),
-      if (vehicleCheck.isNotEmpty)
-        "vehicle_check_report": await MultipartFile.fromFile(
+      if (vehicleCheck.isNotEmpty)"vehicle_check_report": await MultipartFile.fromFile(
           vehicleCheck,
           filename: vehicleCheckName,
         ),
@@ -156,7 +168,8 @@ class DocsVM extends MyBaseViewModel {
         showSnackBar(viewContext, apiResponse.message ?? 'Success');
         await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 4);
         Navigator.of(viewContext).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => TaxPage(name: name)),
+          MaterialPageRoute(builder: (context) =>
+          isEdit ? WaitingPage(name: name) : TaxPage(name: name)),
           (route) => false,
         );
       } else {
@@ -172,23 +185,23 @@ class DocsVM extends MyBaseViewModel {
   }
 
   bool validate() {
-    if (driversLicense.isEmpty) {
+    if (driversLicense.isEmpty && showDriversLicense) {
       showSnackBar(viewContext, "Please select drivers license".tr());
       return false;
     }
-    if (vehicleRegistration.isEmpty) {
+    if (vehicleRegistration.isEmpty && showVehicleRegistration) {
       showSnackBar(viewContext, "Please select vehicle registration".tr());
       return false;
     }
-    if (insuranceDoc.isEmpty) {
+    if (insuranceDoc.isEmpty && showInsuranceDoc) {
       showSnackBar(viewContext, "Please select insurance document".tr());
       return false;
     }
-    if (selfiePhoto.isEmpty) {
+    if (selfiePhoto.isEmpty && showSelfiePhoto) {
       showSnackBar(viewContext, "Please select selfie photo".tr());
       return false;
     }
-    // if (criminalRecords.isEmpty) {
+    // if (criminalRecords.isEmpty && showCriminalRecords) {
     //   showSnackBar(viewContext, "Please select criminal records".tr());
     //   return false;
     // }
@@ -207,5 +220,17 @@ class DocsVM extends MyBaseViewModel {
         duration: const Duration(seconds: 2),
       ),
     );
+  }
+
+  void arrangeEdit(dynamic rejectedFiles){
+    if(rejectedFiles != null) {
+      RejectedFiles files = RejectedFiles.fromJson(rejectedFiles);
+      showDriversLicense = files.driverLicense.isNotEmpty;
+      showVehicleRegistration = files.vehicleRegistration.isNotEmpty;
+      showInsuranceDoc = files.insuranceDocument.isNotEmpty;
+      showSelfiePhoto = files.selfiePhotoId.isNotEmpty;
+      showVehicleCheck = files.vehicleCheckReport.isNotEmpty;
+      notifyListeners();
+    }
   }
 }

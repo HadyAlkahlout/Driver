@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:fuodz/constants/app_colors.dart';
 import 'package:fuodz/view_models/register/docs_vm.dart';
@@ -7,20 +9,29 @@ import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DocsPage extends StatelessWidget {
-  const DocsPage({
+  DocsPage({
     required this.name,
     required this.city,
+    this.isEdit,
+    this.rejectedFiles,
     Key? key,
   }) : super(key: key);
 
   final String name;
   final String city;
 
+  bool? isEdit = false;
+  dynamic rejectedFiles = null;
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<DocsVM>.reactive(
-      viewModelBuilder: () => DocsVM(context),
-      onViewModelReady: (model) {},
+      viewModelBuilder: () => DocsVM(context, isEdit ?? false),
+      onViewModelReady: (model) {
+        if(isEdit == true) {
+          model.arrangeEdit(rejectedFiles);
+        }
+      },
       builder: (context, model, child) {
         return BasePage(
           showLeadingAction: false,
@@ -147,7 +158,7 @@ class DocsPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Visibility(
-                                visible: true,
+                                visible: model.showDriversLicense,
                                 child: Column(
                                   children: [
                                     GestureDetector(
@@ -191,7 +202,7 @@ class DocsPage extends StatelessWidget {
                                               ),
                                             ),
                                             Visibility(
-                                              visible: false,
+                                              visible: model.showDriversLicense && isEdit == true && model.driversLicense.isEmpty,
                                               child: Row(
                                                 spacing: 4,
                                                 children: [
@@ -203,7 +214,7 @@ class DocsPage extends StatelessWidget {
                                                         ?.copyWith(color: Colors.red),
                                                   ),
                                                   Text(
-                                                    'Reason',
+                                                    'Upload new file'.tr(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .bodySmall
@@ -224,7 +235,7 @@ class DocsPage extends StatelessWidget {
                                 ),
                               ),
                               Visibility(
-                                visible: true,
+                                visible: model.showVehicleRegistration,
                                 child: Column(
                                   children: [
                                     GestureDetector(
@@ -269,7 +280,7 @@ class DocsPage extends StatelessWidget {
                                               ),
                                             ),
                                             Visibility(
-                                              visible: false,
+                                              visible: model.showVehicleRegistration && isEdit == true && model.vehicleRegistration.isEmpty,
                                               child: Row(
                                                 spacing: 4,
                                                 children: [
@@ -281,7 +292,7 @@ class DocsPage extends StatelessWidget {
                                                         ?.copyWith(color: Colors.red),
                                                   ),
                                                   Text(
-                                                    'Reason',
+                                                    'Upload new file'.tr(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .bodySmall
@@ -302,7 +313,7 @@ class DocsPage extends StatelessWidget {
                                 ),
                               ),
                               Visibility(
-                                visible: true,
+                                visible: model.showInsuranceDoc,
                                 child: Column(
                                   children: [
                                     GestureDetector(
@@ -346,7 +357,7 @@ class DocsPage extends StatelessWidget {
                                               ),
                                             ),
                                             Visibility(
-                                              visible: false,
+                                              visible: model.showInsuranceDoc && isEdit == true && model.insuranceDoc.isEmpty,
                                               child: Row(
                                                 spacing: 4,
                                                 children: [
@@ -358,7 +369,7 @@ class DocsPage extends StatelessWidget {
                                                         ?.copyWith(color: Colors.red),
                                                   ),
                                                   Text(
-                                                    'Reason',
+                                                    'Upload new file'.tr(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .bodySmall
@@ -379,7 +390,7 @@ class DocsPage extends StatelessWidget {
                                 ),
                               ),
                               Visibility(
-                                visible: true,
+                                visible: model.showSelfiePhoto,
                                 child: Column(
                                   children: [
                                     GestureDetector(
@@ -423,7 +434,7 @@ class DocsPage extends StatelessWidget {
                                               ),
                                             ),
                                             Visibility(
-                                              visible: false,
+                                              visible: model.showSelfiePhoto && isEdit == true && model.selfiePhoto.isEmpty,
                                               child: Row(
                                                 spacing: 4,
                                                 children: [
@@ -435,7 +446,7 @@ class DocsPage extends StatelessWidget {
                                                         ?.copyWith(color: Colors.red),
                                                   ),
                                                   Text(
-                                                    'Reason',
+                                                    'Upload new file'.tr(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .bodySmall
@@ -456,7 +467,7 @@ class DocsPage extends StatelessWidget {
                                 ),
                               ),
                               Visibility(
-                                visible: false,
+                                visible: model.showCriminalRecords,
                                 child: Column(
                                   children: [
                                     GestureDetector(
@@ -500,7 +511,7 @@ class DocsPage extends StatelessWidget {
                                               ),
                                             ),
                                             Visibility(
-                                              visible: false,
+                                              visible: model.showCriminalRecords && isEdit == true && model.criminalRecords.isEmpty,
                                               child: Row(
                                                 spacing: 4,
                                                 children: [
@@ -512,7 +523,7 @@ class DocsPage extends StatelessWidget {
                                                         ?.copyWith(color: Colors.red),
                                                   ),
                                                   Text(
-                                                    'Reason',
+                                                    'Upload new file'.tr(),
                                                     style: Theme.of(context)
                                                         .textTheme
                                                         .bodySmall
@@ -533,7 +544,7 @@ class DocsPage extends StatelessWidget {
                                 ),
                               ),
                               Visibility(
-                                visible: true,
+                                visible: model.showVehicleCheck,
                                 child: GestureDetector(
                                   onTap: () => openDocs(context, model, 6),
                                   child: Padding(
@@ -575,7 +586,7 @@ class DocsPage extends StatelessWidget {
                                           ),
                                         ),
                                         Visibility(
-                                          visible: false,
+                                          visible: model.showVehicleCheck && isEdit == true && model.vehicleCheck.isEmpty,
                                           child: Row(
                                             spacing: 4,
                                             children: [
@@ -587,7 +598,7 @@ class DocsPage extends StatelessWidget {
                                                     ?.copyWith(color: Colors.red),
                                               ),
                                               Text(
-                                                'Reason',
+                                                'Upload new file'.tr(),
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodySmall

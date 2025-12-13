@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fuodz/constants/api.dart';
 import 'package:fuodz/requests/auth.request.dart';
 import 'package:fuodz/services/auth.service.dart';
+import 'package:fuodz/services/firebase_token.service.dart';
 import 'package:fuodz/view_models/base.view_model.dart';
 import 'package:fuodz/utils/utils.dart';
 import 'package:fuodz/views/pages/auth/register/pin_page.dart';
@@ -84,6 +85,19 @@ class RegisterViewModel extends MyBaseViewModel {
           print('Test Message: ${apiResponse.body['message']}');
           print('Test Token: ${apiResponse.body['temp_token']}');
           await AuthServices.setAuthBearerToken(apiResponse.body["temp_token"]);
+
+          // Sync FCM token with server after successful login
+          try {
+            final token = await FirebaseTokenService.instance.getDeviceToken();
+            if (token != null) {
+              await FirebaseTokenService.instance.syncDeviceTokenWithServer(
+                token,
+                true
+              );
+            }
+          } catch (e) {
+            print("Error syncing FCM token after login: $e");
+          }
 
           await LocalStorageService.prefs!.setBool(AppStrings.driverWaiting, true);
           await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 1);

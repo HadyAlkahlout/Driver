@@ -389,6 +389,7 @@
   "Please agree to the agreement": "Пожалуйста, примите соглашение",
   "Thank you for registering with us": "Спасибо за регистрацию",
   "Please wait while we process your registration": "Подождите, пока мы обрабатываем регистрацию",
-  "You can leave the app now and we will notify you when we finish the process": "Вы можете выйти из приложения, мы уведомим вас о завершении"
-
+  "You can leave the app now and we will notify you when we finish the process": "Вы можете выйти из приложения, мы уведомим вас о завершении",
+  "Rejected;": "Rejected;",
+  "Upload new file": "Upload new file"
 }

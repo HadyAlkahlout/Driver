@@ -389,6 +389,7 @@
   "Please agree to the agreement": "契約に同意してください",
   "Thank you for registering with us": "ご登録ありがとうございます",
   "Please wait while we process your registration": "登録処理中です。しばらくお待ちください。",
-  "You can leave the app now and we will notify you when we finish the process": "アプリを閉じても構いません。処理完了後に通知します。"
-
+  "You can leave the app now and we will notify you when we finish the process": "アプリを閉じても構いません。処理完了後に通知します。",
+  "Rejected;": "Rejected;",
+  "Upload new file": "Upload new file"
 }

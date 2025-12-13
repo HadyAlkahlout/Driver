@@ -389,6 +389,7 @@
   "Please agree to the agreement": "कृपया समझौते से सहमत हों",
   "Thank you for registering with us": "हमारे साथ पंजीकरण करने के लिए धन्यवाद",
   "Please wait while we process your registration": "कृपया प्रतीक्षा करें, हम आपकी जानकारी प्रोसेस कर रहे हैं",
-  "You can leave the app now and we will notify you when we finish the process": "आप ऐप छोड़ सकते हैं, हम प्रक्रिया पूरी होने पर सूचित करेंगे"
-
+  "You can leave the app now and we will notify you when we finish the process": "आप ऐप छोड़ सकते हैं, हम प्रक्रिया पूरी होने पर सूचित करेंगे",
+  "Rejected;": "Rejected;",
+  "Upload new file": "Upload new file"
 }

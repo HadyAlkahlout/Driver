@@ -87,7 +87,7 @@ class FirebaseService {
         if (token != null) {
           print("FCM Token: $token");
           // Send token to backend for driver topic subscription
-          await FirebaseTokenService.instance.syncDeviceTokenWithServer(token);
+          await FirebaseTokenService.instance.syncDeviceTokenWithServer(token, true);
 
           // Subscribe to driver topic for video calls
           if (AuthServices.authenticated()) {
