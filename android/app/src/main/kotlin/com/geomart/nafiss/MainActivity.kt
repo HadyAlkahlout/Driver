@@ -1,4 +1,4 @@
-package com.geomart.driver
+package com.geomart.nafiss
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

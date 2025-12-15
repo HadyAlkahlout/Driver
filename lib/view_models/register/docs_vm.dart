@@ -151,7 +151,8 @@ class DocsVM extends MyBaseViewModel {
         ),
       "edit": isEdit,
     });
-    print('Test Map: ${formData.files}');
+    print('Test Map files: ${formData.files}');
+    print('Test Map fields: ${formData.fields}');
     try {
       String token = await AuthServices.getAuthBearerToken();
       final response = await Dio().post(
@@ -180,11 +181,17 @@ class DocsVM extends MyBaseViewModel {
         notifyListeners();
         toastError(apiResponse.message ?? 'Something went wrong'.tr());
       }
-    } catch (e) {
+    } on DioException catch (e) {
       isLoading = false;
       notifyListeners();
       print('Test Hady error: ${e}');
-      showSnackBar(viewContext, e.toString());
+      print('Test Hady error response: ${e.response}');
+      print('Test Hady error response data: ${e}');
+      if(e.response != null) {
+        showSnackBar(viewContext, e.response!.data['message'] ?? 'Something went wrong'.tr());
+      } else{
+        showSnackBar(viewContext, 'Something went wrong'.tr());
+      }
     }
   }
 

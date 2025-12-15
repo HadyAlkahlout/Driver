@@ -17,7 +17,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.geomart.driver"
+    namespace = "com.geomart.nafiss"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -31,7 +31,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.geomart.driver"
+        applicationId = "com.geomart.nafiss"
         minSdk = flutter.minSdkVersion
         targetSdk = 35
         ndkVersion = "27.0.12077973"

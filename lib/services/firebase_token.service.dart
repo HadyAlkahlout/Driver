@@ -9,6 +9,7 @@ class FirebaseTokenService {
 
   //
   static FirebaseTokenService? _instance;
+
   static FirebaseTokenService get instance {
     _instance ??= FirebaseTokenService._();
     return _instance!;
@@ -20,7 +21,13 @@ class FirebaseTokenService {
   Future<String?> getDeviceToken() async {
     try {
       final firebaseMessaging = FirebaseMessaging.instance;
+
+      // iOS requires APNs token first
+      String? apnsToken = await firebaseMessaging.getAPNSToken();
+      print('APNs Token: $apnsToken');
+
       final deviceToken = await firebaseMessaging.getToken();
+
       return deviceToken;
     } catch (error) {
       log("Error getting device token: $error");
