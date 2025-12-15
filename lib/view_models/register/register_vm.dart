@@ -68,6 +68,9 @@ class RegisterViewModel extends MyBaseViewModel {
     isLoading = true;
     notifyListeners();
     try {
+      String fcmToken = await FirebaseTokenService.instance.getDeviceToken() ?? "";
+      print("FCM Token: $fcmToken");
+
       Map<String, dynamic> data = {};
       data["phone"] = phoneTEC.text;
       data["country_code"] = selectedCountry?.countryCode ?? "";
@@ -75,6 +78,8 @@ class RegisterViewModel extends MyBaseViewModel {
       data["name"] = nameTEC.text;
       data["password"] = passwordTEC.text;
       data["dob"] = dobTxt;
+      data["fcm_token"] = fcmToken;
+
 
       final apiResponse = await authRequest.newRegisterRequest(vals: data);
 
@@ -85,19 +90,6 @@ class RegisterViewModel extends MyBaseViewModel {
           print('Test Message: ${apiResponse.body['message']}');
           print('Test Token: ${apiResponse.body['temp_token']}');
           await AuthServices.setAuthBearerToken(apiResponse.body["temp_token"]);
-
-          // Sync FCM token with server after successful login
-          try {
-            final token = await FirebaseTokenService.instance.getDeviceToken();
-            if (token != null) {
-              await FirebaseTokenService.instance.syncDeviceTokenWithServer(
-                token,
-                true
-              );
-            }
-          } catch (e) {
-            print("Error syncing FCM token after login: $e");
-          }
 
           await LocalStorageService.prefs!.setBool(AppStrings.driverWaiting, true);
           await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 1);

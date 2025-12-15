@@ -149,8 +149,9 @@ class DocsVM extends MyBaseViewModel {
           vehicleCheck,
           filename: vehicleCheckName,
         ),
+      "edit": isEdit,
     });
-
+    print('Test Map: ${formData.files}');
     try {
       String token = await AuthServices.getAuthBearerToken();
       final response = await Dio().post(
@@ -166,7 +167,9 @@ class DocsVM extends MyBaseViewModel {
         isLoading = false;
         notifyListeners();
         showSnackBar(viewContext, apiResponse.message ?? 'Success');
-        await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 4);
+        if (!isEdit) {
+          await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 4);
+        }
         Navigator.of(viewContext).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) =>
           isEdit ? WaitingPage(name: name) : TaxPage(name: name)),
@@ -180,6 +183,7 @@ class DocsVM extends MyBaseViewModel {
     } catch (e) {
       isLoading = false;
       notifyListeners();
+      print('Test Hady error: ${e}');
       showSnackBar(viewContext, e.toString());
     }
   }

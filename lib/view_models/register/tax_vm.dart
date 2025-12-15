@@ -63,7 +63,7 @@ class TaxVM extends MyBaseViewModel {
         if (apiResponse.body['status'] && apiResponse.body['code'] == 200) {
           showSnackBar(apiResponse.message ?? "Success");
           print(apiResponse.body['url']);
-          await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 5);
+          await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 4);
           Navigator.of(viewContext).push(
             MaterialPageRoute(
               builder:

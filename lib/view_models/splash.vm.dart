@@ -142,7 +142,7 @@ class SplashViewModel extends MyBaseViewModel {
                 ),
               );
             }
-            if (apiResponse.body['data'] == 'UNDER_REVIEW') {
+            if (apiResponse.body['data'] == 'UNDER_REVIEW' || apiResponse.body['data'] == 'PENDING_DOCUMENTS') {
               Navigator.of(viewContext).pushAndRemoveUntil(
                 MaterialPageRoute(
                   builder:
@@ -187,7 +187,8 @@ class SplashViewModel extends MyBaseViewModel {
               viewContext,
             ).pushNamedAndRemoveUntil(AppRoutes.loginRoute, (route) => false);
           }
-        } else {
+        }
+        else {
           Navigator.of(viewContext).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => getRegisterStage()),
                 (route) => false,

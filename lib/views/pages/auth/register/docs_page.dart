@@ -72,18 +72,12 @@ class DocsPage extends StatelessWidget {
                       ),
                       SizedBox(height: 16.0),
                       Row(
-                        spacing: 8,
                         children: [
-                          Text(
-                            'Welcome'.tr(),
-                            style: Theme.of(context).textTheme.headlineLarge
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          ),
                           Expanded(
                             child: Text(
-                              name,
+                              'Welcome'.tr() + ', ' + name,
+                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
                               style: Theme.of(context).textTheme.headlineLarge
                                   ?.copyWith(fontWeight: FontWeight.bold),
                             ),

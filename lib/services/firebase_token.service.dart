@@ -28,7 +28,7 @@ class FirebaseTokenService {
     }
   }
 
-  syncDeviceTokenWithServer(String? deviceToken, bool isRegister) async {
+  syncDeviceTokenWithServer(String? deviceToken) async {
     try {
       final storagePref = await LocalStorageService.getPrefs();
       //check if saved token is same as current token
@@ -40,7 +40,7 @@ class FirebaseTokenService {
       //save token
       await storagePref.setString(DEVICE_TOKEN_STORE_KEY, deviceToken!);
       //send token to server if the auth is logged in
-      if (AuthServices.authenticated() || isRegister) {
+      if (AuthServices.authenticated()) {
         await AuthRequest().updateDeviceToken(deviceToken);
       }
     } catch (error) {
@@ -54,13 +54,13 @@ class FirebaseTokenService {
       final deviceToken = await getDeviceToken();
       if (deviceToken != null) {
         print("FCM Token: $deviceToken");
-        await syncDeviceTokenWithServer(deviceToken, true);
+        await syncDeviceTokenWithServer(deviceToken);
       }
 
       // Listen for token refresh
       FirebaseMessaging.instance.onTokenRefresh.listen((newToken) {
         print("FCM Token refreshed: $newToken");
-        syncDeviceTokenWithServer(newToken, true);
+        syncDeviceTokenWithServer(newToken);
       });
     } catch (error) {
       log("Error setting up Firebase messaging: $error");
