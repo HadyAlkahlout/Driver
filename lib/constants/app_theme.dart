@@ -78,6 +78,57 @@ class AppTheme {
         surface: Colors.grey[850],
       ),
       useMaterial3: false,
+      datePickerTheme: DatePickerThemeData(
+        backgroundColor: Colors.grey.shade900,
+
+        // Header (Sun, Dec 16)
+        headerForegroundColor: Colors.white,
+        headerBackgroundColor: Colors.deepPurple,
+
+        // Days text
+        dayForegroundColor:
+        MaterialStateProperty.all(Colors.white),
+
+        // Today border color
+        todayBorder: BorderSide(color: Colors.deepPurple),
+
+        // Weekday labels (S M T W T F S)
+        weekdayStyle: TextStyle(
+          color: Colors.white,
+        ),
+
+        // Year picker text
+        yearForegroundColor:
+        MaterialStateProperty.all(Colors.white),
+
+        confirmButtonStyle: ButtonStyle(
+          textStyle: MaterialStateProperty.all(
+            TextStyle(
+              color: AppColor.accentColor,
+            ),
+          ),
+        ),
+
+        cancelButtonStyle: ButtonStyle(
+          textStyle: MaterialStateProperty.all(
+            TextStyle(
+              color: AppColor.accentColor,
+            ),
+          ),
+        ),
+
+        rangePickerHeaderHeadlineStyle: TextStyle(
+          color: Colors.white,
+        ),
+
+        rangePickerHeaderHelpStyle: TextStyle(
+          color: Colors.white,
+        ),
+
+        toggleButtonTextStyle: TextStyle(
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +11,6 @@ import 'package:fuodz/views/pages/auth/register/tax_page.dart';
 import 'package:fuodz/views/pages/auth/register/waiting_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-
 import '../../services/auth.service.dart';
 
 class DocsVM extends MyBaseViewModel {
