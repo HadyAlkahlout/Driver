@@ -88,8 +88,8 @@ class RegisterViewModel extends MyBaseViewModel {
         notifyListeners();
         if (apiResponse.body['status'] && apiResponse.body['code'] == 200) {
           print('Test Message: ${apiResponse.body['message']}');
-          // print('Test Token: ${apiResponse.body['temp_token']}');
-          // await AuthServices.setAuthBearerToken(apiResponse.body["temp_token"]);
+          print('Test Token: ${apiResponse.body['temp_token']}');
+          await AuthServices.setAuthBearerToken(apiResponse.body["temp_token"]);
 
           await LocalStorageService.prefs!.setBool(AppStrings.driverWaiting, true);
           await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 1);

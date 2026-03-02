@@ -77,8 +77,8 @@ class PinViewModel extends MyBaseViewModel {
         isLoading = false;
         notifyListeners();
         if (apiResponse.body['success'] && apiResponse.body['code'] == 200) {
-          print('Test Token: ${apiResponse.body['token']}');
-          await AuthServices.setAuthBearerToken(apiResponse.body["token"]);
+          // print('Test Token: ${apiResponse.body['token']}');
+          // await AuthServices.setAuthBearerToken(apiResponse.body["token"]);
           await LocalStorageService.prefs!.setInt(AppStrings.registerStage, 2);
           showSnackBar(viewContext, apiResponse.message ?? "Verification successful".tr());
           Navigator.of(viewContext).pushAndRemoveUntil(

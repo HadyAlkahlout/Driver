@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:311280268440:android:605e72e43e313c31914ced",
+        "mobilesdk_app_id": "1:311280268440:android:8fd4c82cbed8753a914ced",
         "android_client_info": {
-          "package_name": "com.geomart.nafiss"
+          "package_name": "com.geomart.driver"
         }
       },
       "oauth_client": [],
